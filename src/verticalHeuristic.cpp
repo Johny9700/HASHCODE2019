@@ -51,3 +51,11 @@ std::vector<Slide> makeSlidesFromVertical(std::vector<Photo> photos)
     }
     return slides;
 }
+
+std::vector<Slide> simple(std::vector<Photo> photos){
+    std::vector<Slide> slides;
+    for(unsigned long int i=1; i<photos.size(); i+=2){
+        slides.emplace_back(photos[i-1], photos[i]);
+    }
+    return slides;
+}

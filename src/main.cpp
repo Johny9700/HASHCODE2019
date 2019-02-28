@@ -7,6 +7,7 @@
 #include <vector>
 #include <algorithm>
 #include "verticalHeuristic.h"
+#include "solve.h"
 
 void process(std::string filename){
 	std::cout<< "Processing "+filename << std::endl;
@@ -48,7 +49,7 @@ void process(std::string filename){
 	// std::vector<Slide> sVert = makeSlidesFromVertical(photosVert);
 	// std::cout<<"first part "<< sVert.size()<<std::endl;
 	// //slides.insert(slides.end(), sVert.begin(), sVert.end());
-	// for(int i=0; i<sVert.size(); i++){
+	// for(unsigned long int i=0; i<sVert.size(); i++){
 	// 	std::cout<<"Hello "<<sVert[i].id1<<std::endl;
 	// 	slides.push_back(sVert[i]);
 	// }
@@ -56,7 +57,7 @@ void process(std::string filename){
 
 	//TODO sort slides
 
-	std::vector<Slide> result = slides;
+	std::vector<Slide> result = solve(slides);
 
 	std::ofstream out;
 	out.open((filename+"_result.txt").c_str());
