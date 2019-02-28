@@ -18,9 +18,9 @@ Slide::Slide(Photo photo1, Photo photo2)
     }
     used = false;
     //----debug
-    for(auto tag : mapa){
-        cout << tag <<endl;
-    }
+    //for(auto tag : mapa){
+    //    cout << tag <<endl;
+    //}
     //----debug
 }
 

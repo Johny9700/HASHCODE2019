@@ -15,27 +15,34 @@ std::set<T> getUnion(const std::set<T>& a, const std::set<T>& b)
 std::vector<Slide> makeSlidesFromVertical(std::vector<Photo> photos)
 {
     std::vector<Slide> slides;
-    std::set<std::string> merged;
     
-    for(auto photo : photos)
+    for(long unsigned int i=0; i<photos.size(); i++)
     {
-        photo.used = true;
-        int maxNumOfTags = 0;
-        Photo *candidate = nullptr;
-        for(auto photo2 : photos)
+        photos[i].used = true;
+        long unsigned int maxNumOfTags = 0;
+        int curr = -1;
+        
+        for(long unsigned int j=0; j<photos.size(); j++)
         {
-            if(photo2.id != photo.id && !photo2.used)
-            {
-                merged = getUnion(photo.mapa, photo2.mapa);
-                if(maxNumOfTags < merged.size());
+            std::set<std::string> merged;
+            
+            if(photos[j].id != photos[i].id && !photos[j].used){
+                std::cout<< "xDD" << std::endl;
+                merged = getUnion(photos[i].mapa, photos[j].mapa);
+                if(maxNumOfTags < merged.size())
                 {
                     maxNumOfTags = merged.size();
-                    candidate = &photo2;
+                    curr = j;
                 }
             }
+            //merged.clear();
         }
-        candidate->used = true;
-        slides.emplace_back(Slide(photo, *candidate));
+        photos[curr].used = true;
+        
+        if(curr != -1){
+            std::cout<<"xD2"<<std::endl;
+            slides.emplace_back(Slide(photos[i], photos[curr]));
+        }
     }
 
     for(auto slide : slides)
