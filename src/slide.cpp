@@ -6,6 +6,7 @@ Slide::Slide(Photo photo)
     id2 = -1;
     mapa = photo.mapa;
     used = false;
+    std::cout<< photo.id <<std::endl;
 }
 
 Slide::Slide(Photo photo1, Photo photo2)
@@ -27,8 +28,9 @@ Slide::Slide(Photo photo1, Photo photo2)
 void Slide::get_id(ofstream& out_stream){
     out_stream << id1;
     if(id2 != -1){
-        out_stream << id2;
+        out_stream <<" "<< id2;
     }
+    out_stream << std::endl;
 }
 
 Slide::~Slide()
