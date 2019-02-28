@@ -6,7 +6,6 @@ Slide::Slide(Photo photo)
     id2 = -1;
     mapa = photo.mapa;
     used = false;
-    std::cout<< photo.id <<std::endl;
 }
 
 Slide::Slide(Photo photo1, Photo photo2)

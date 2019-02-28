@@ -24,7 +24,7 @@ void process(std::string filename){
 
 	for(int i=0; i<N; i++){
 		photos.emplace_back(Photo(i,in));
-		std::cout<<photos[i].id<<std::endl;
+		//std::cout<<photos[i].id<<std::endl;
 	}
 	in.close();
 
@@ -91,7 +91,7 @@ int main() {
 	}
 	**/
 
-	for(int i=0; i<1; i++){
+	for(int i=0; i<5; i++){
 		process(filenames[i]);
 	}
 

@@ -6,7 +6,7 @@ Photo::Photo(int i, ifstream& input)
     id = i;
     char c;
     input >> c;
-    std::cout << c <<std::endl;
+    //std::cout << c <<std::endl;
      if(c == 'V'){
          horizontal = false;
      } else{
@@ -15,7 +15,7 @@ Photo::Photo(int i, ifstream& input)
 
     int number_of_tags;
     input >> number_of_tags;
-    std::cout<< number_of_tags <<std::endl;
+    //std::cout<< number_of_tags <<std::endl;
     for(int i = 0; i < number_of_tags; i++){
         string temp;
         input >> temp;
