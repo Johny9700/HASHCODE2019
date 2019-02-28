@@ -2,6 +2,15 @@
 #include "photo.h"
 #include <set>
 #include <algorithm>
+#include <iterator>
+
+template <typename T>
+std::set<T> getUnion(const std::set<T>& a, const std::set<T>& b)
+{
+  std::set<T> result = a;
+  result.insert(b.begin(), b.end());
+  return result;
+}
 
 std::vector<Slide> makeSlidesFromVertical(std::vector<Photo> photos)
 {
@@ -17,9 +26,7 @@ std::vector<Slide> makeSlidesFromVertical(std::vector<Photo> photos)
         {
             if(photo2.id != photo.id && !photo2.used)
             {
-                std::set_union(photo.mapa.begin(), photo.mapa.end(),
-                       photo2.mapa.begin(), photo2.mapa.end(),                  
-                       std::back_inserter(merged));
+                merged = getUnion(photo.mapa, photo2.mapa);
                 if(maxNumOfTags < merged.size());
                 {
                     maxNumOfTags = merged.size();
