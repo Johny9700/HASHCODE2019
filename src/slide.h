@@ -2,18 +2,21 @@
 #define SLIDE_H
 #include <set>
 #include <string>
+#include "photo.h"
 
-class slide
+class Slide
 {
 private:
     /* data */
 public:
-    slide(/* args */);
-    ~slide();
+    Slide(Photo photo);
+    Slide(Photo photo1, Photo photo2);
+    ~Slide();
     int id1;
     int id2;
     std::set<std::string> mapa;
     bool used;
+    int kryterium;
 };
 
 #endif /* SLIDE_H */
