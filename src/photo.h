@@ -12,7 +12,7 @@ class Photo
 private:
     /* data */
 public:
-    Photo(ifstream& in);
+    Photo(int i, ifstream& in);
     ~Photo();
     int id;
     bool horizontal;
