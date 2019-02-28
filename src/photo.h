@@ -16,6 +16,7 @@ public:
     ~Photo();
     int id;
     bool horizontal;
+    bool used;
     std::set<std::string> mapa;
 };
 

@@ -18,6 +18,7 @@ Photo::Photo(ifstream& input)
         input >> temp;
         mapa.insert(temp);
     }
+    used = false;
 }
 
 Photo::~Photo()
