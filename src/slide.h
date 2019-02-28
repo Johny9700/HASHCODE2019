@@ -13,7 +13,7 @@ public:
     Slide(Photo photo1, Photo photo2);
     ~Slide();
     void get_id(ofstream& out_stream);
-    void calculate_critetia(Slide slide);
+    void calculate_criteria(Slide slide);
     int id1;
     int id2;
     std::set<std::string> mapa;
