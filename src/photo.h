@@ -2,14 +2,18 @@
 #define PHOTO_H
 #include <set>
 #include <string>
+#include <iostream>
+#include <fstream>
 
-class photo
+using namespace std;
+
+class Photo
 {
 private:
     /* data */
 public:
-    photo(/* args */);
-    ~photo();
+    Photo(ifstream& in);
+    ~Photo();
     int id;
     bool horizontal;
     std::set<std::string> mapa;
