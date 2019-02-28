@@ -24,6 +24,13 @@ Slide::Slide(Photo photo1, Photo photo2)
     //----debug
 }
 
+void Slide::get_id(ofstream& out_stream){
+    out_stream << id1;
+    if(id2 != -1){
+        out_stream << id2;
+    }
+}
+
 Slide::~Slide()
 {
 }
