@@ -45,15 +45,15 @@ void process(std::string filename){
 
 	std::cout<< "dividing photos " << slides.size() <<std::endl;
 
-	// //TODO deal with verticals
-	// std::vector<Slide> sVert = makeSlidesFromVertical(photosVert);
-	// std::cout<<"first part "<< sVert.size()<<std::endl;
-	// //slides.insert(slides.end(), sVert.begin(), sVert.end());
-	// for(unsigned long int i=0; i<sVert.size(); i++){
-	// 	std::cout<<"Hello "<<sVert[i].id1<<std::endl;
-	// 	slides.push_back(sVert[i]);
-	// }
-	// std::cout<<"merging finished"<<std::endl;
+	//TODO deal with verticals
+	std::vector<Slide> sVert = makeSlidesFromVertical(photosVert);
+	std::cout<<"first part "<< sVert.size()<<std::endl;
+	//slides.insert(slides.end(), sVert.begin(), sVert.end());
+	for(unsigned long int i=0; i<sVert.size(); i++){
+		// std::cout<<"Hello "<<sVert[i].id1<<std::endl;
+		slides.push_back(sVert[i]);
+	}
+	std::cout<<"merging finished"<<std::endl;
 
 	//TODO sort slides
 

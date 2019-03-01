@@ -27,7 +27,7 @@ std::vector<Slide> makeSlidesFromVertical(std::vector<Photo> photos)
             std::set<std::string> merged;
             
             if(photos[j].id != photos[i].id && !photos[j].used){
-                std::cout<< "xDD" << std::endl;
+                // std::cout<< "xDD" << std::endl;
                 merged = getUnion(photos[i].mapa, photos[j].mapa);
                 if(maxNumOfTags < merged.size())
                 {
@@ -38,9 +38,10 @@ std::vector<Slide> makeSlidesFromVertical(std::vector<Photo> photos)
             //merged.clear();
         }
         
+        
         if(curr != -1){
             photos[curr].used = true;
-            std::cout<<"xD2"<<std::endl;
+            // std::cout<<"xD2"<<std::endl;
             slides.emplace_back(Slide(photos[i], photos[curr]));
         }
     }
