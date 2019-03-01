@@ -22,15 +22,14 @@ void process(std::string filename){
 	std::cout << N <<std::endl;
 	std::vector<Photo> photos;
 
-	std::cout<< "reading photos" <<std::endl;
+	std::cout<< "Reading photos" <<std::endl;
 
 	for(int i=0; i<N; i++){
 		photos.emplace_back(Photo(i,in));
-		//std::cout<<photos[i].id<<std::endl;
 	}
 	in.close();
 
-	std::cout<< "reading photos finished" <<std::endl;
+	std::cout<< "Dividing photos " <<std::endl;
 
 	std::vector<Slide> slides;
 	std::vector<Photo> photosVert;
@@ -43,21 +42,22 @@ void process(std::string filename){
 		}
 	}
 
-	std::cout<< "dividing photos " << slides.size() <<std::endl;
+	//--- processing verticals ---///
 
-	//TODO deal with verticals
-	std::vector<Slide> sVert = makeSlidesFromVertical(photosVert);
-	std::cout<<"first part "<< sVert.size()<<std::endl;
+	std::cout << "Processing verticals" << std::endl;
+
+	std::vector<Slide> sVert = simple(photosVert);
 	//slides.insert(slides.end(), sVert.begin(), sVert.end());
 	for(unsigned long int i=0; i<sVert.size(); i++){
-		// std::cout<<"Hello "<<sVert[i].id1<<std::endl;
 		slides.push_back(sVert[i]);
 	}
-	std::cout<<"merging finished"<<std::endl;
+	std::cout << "Merging finished" << std::endl;
 
-	//TODO sort slides
+	//--- solving slides --///
 
-	std::vector<Slide> result = solve(slides);
+	//std::vector<Slide> result = solve(slides);
+	//std::vector<Slide> result = slides;
+	std::vector<Slide> result = solve_meta_1(slides);
 
 	std::ofstream out;
 	out.open((filename+"_result.txt").c_str());
@@ -101,16 +101,10 @@ int main() {
 	}
 	**/
 
-	for(int i=0; i<1; i++){
+	for(int i=0; i<5; i++){
 		process(filenames[i]);
 	}
 
 	std::cout << "Exit" <<std::endl;
 	
-
-
-
-
-
-
 }

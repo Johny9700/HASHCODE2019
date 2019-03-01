@@ -45,3 +45,55 @@ vector<Slide> solve(vector<Slide> in_slides){
   }
   return final_slides;
 }
+
+int scoring_func(Slide previous, Slide current){
+  int shared = getUnionSize(previous.mapa, current.mapa);
+  int p = previous.mapa.size();
+  int c = current.mapa.size();
+  int intersec = p + c - shared;
+  return min(intersec, min(p-intersec, c-intersec));
+}
+
+std::vector<Slide> solve_meta_1(std::vector<Slide> s){
+
+  int max_iter = 10;
+  int min_len = min(5, (int)s.size());
+
+  int iter = 0;
+
+  int point = 2;
+
+  std::vector<std::vector<Slide>> stripes;
+  std::cout << "Begin stripes meta" << std::endl;
+  for(int i=0; i<s.size(); i++){
+    std::vector<Slide> temp;
+    temp.push_back(s[i]);
+    stripes.push_back(temp);
+  }
+
+  //metaheuristic
+
+  while (iter < max_iter && min_len < stripes.size()){
+    iter ++;
+    for(int i=1; i<stripes.size(); i++){
+      if(scoring_func(stripes[i-1].back(), stripes[i].front()) >= point){
+        i--;
+        stripes[i].insert(stripes[i].end(), stripes[i+1].begin(), stripes[i+1].end());
+        stripes[i+1] = stripes[i];
+        stripes.erase(stripes.begin()+i);
+      }
+    }
+    std::cout << "Iteration:\t" << iter << "\tstripes size\t" << stripes.size() <<std::endl;
+    std::random_shuffle(stripes.begin(), stripes.end());
+  }
+
+  std::vector<Slide> result;
+  for(int i=0; i<stripes.size(); i++){
+    result.insert(result.end(), stripes[i].begin(), stripes[i].end());
+    stripes[i].clear();
+    stripes[i].shrink_to_fit();
+  }
+
+  std::cout << "End stripes meta" << std::endl;
+  return result;
+}
