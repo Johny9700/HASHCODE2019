@@ -37,9 +37,9 @@ std::vector<Slide> makeSlidesFromVertical(std::vector<Photo> photos)
             }
             //merged.clear();
         }
-        photos[curr].used = true;
         
         if(curr != -1){
+            photos[curr].used = true;
             std::cout<<"xD2"<<std::endl;
             slides.emplace_back(Slide(photos[i], photos[curr]));
         }
