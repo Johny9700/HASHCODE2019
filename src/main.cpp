@@ -65,6 +65,18 @@ void process(std::string filename){
 	for(unsigned long int i=0; i<result.size(); i++){
 		result[i].get_id(out);
 	}
+
+	// clean up the mess
+	slides.clear();
+	slides.shrink_to_fit();
+	result.clear();
+	result.shrink_to_fit();
+	sVert.clear();
+	sVert.shrink_to_fit();
+	photosVert.clear();
+	photosVert.shrink_to_fit();
+	photos.clear();
+	photos.shrink_to_fit();
 	
 	out.close();
 }

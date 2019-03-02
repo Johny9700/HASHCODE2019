@@ -1,6 +1,7 @@
 #include "slide.h"
 #include <vector>
 #include <algorithm>
+#include <ctime>
 
 int getUnionSize(const set<string>& a, const set<string>& b);
 
