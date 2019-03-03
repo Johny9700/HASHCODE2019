@@ -60,3 +60,75 @@ std::vector<Slide> simple(std::vector<Photo> photos){
     }
     return slides;
 }
+
+std::vector<Slide> minimize_intersect(std::vector<Photo> photos){
+    std::vector<Slide> s;
+
+    int length = (int)photos.size();
+
+    //inverted index
+    std::unordered_map<std::string, std::vector<int>> ii;
+
+    for(int i=0; i<length; i++){
+        for(auto k : photos[i].mapa){
+            ii[k].push_back(i);
+        }
+    }
+
+    //creating slides
+    bool* used = new bool[length];
+    for(int i=0; i<length; i++){
+        used[i] = false;
+    }
+
+    for(int i=0; i<length; i++){
+        if(!used[i]){
+            used[i] = true;
+
+            int* intersects = new int[length];
+            for(int j=0; j<length; j++){
+                intersects[j] = 0;
+            }
+
+            for(auto k : photos[i].mapa){ // increasing value of intersects size
+                for(auto l : ii[k]){
+                    if(!used[l] && l!=i){
+                        intersects[l]++;
+                    }
+                }
+            }
+
+            //make field corresponding to current photo very big
+            intersects[i] = *max_element(intersects, intersects+length) + 1;
+
+            int mini = intersects[i];
+            int miniI = i;
+
+            for(int j=0; j<length; j++){
+                if(!used[j] && intersects[j] < mini){
+                    mini = intersects[j];
+                    miniI = j;
+                }
+            }
+
+            if(i != miniI) {
+                used[miniI] = true;
+                s.emplace_back(Slide(photos[i], photos[miniI]));
+                //std::cout << "Double slide added" <<std::endl;
+            }
+
+            delete [] intersects;
+        }
+    }
+
+    delete [] used;
+
+    // clean inverted index
+    for(auto f : ii){
+        f.second.clear();
+        f.second.shrink_to_fit();
+    }
+    ii.clear();
+
+    return s;
+}

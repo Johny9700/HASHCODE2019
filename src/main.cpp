@@ -46,12 +46,21 @@ void process(std::string filename, int max_iter, int point){
 
 	std::cout << "Processing verticals" << std::endl;
 
-	std::vector<Slide> sVert = simple(photosVert);
+	//std::vector<Slide> sVert = simple(photosVert);
+	std::vector<Slide> sVert = minimize_intersect(photosVert);
 	//slides.insert(slides.end(), sVert.begin(), sVert.end());
 	for(unsigned long int i=0; i<sVert.size(); i++){
 		slides.push_back(sVert[i]);
 	}
 	std::cout << "Merging finished" << std::endl;
+
+	// for(auto temp : slides){
+	// 	std::cout << temp.id1 << "\t" << temp.id2 << "\t";
+	// 	for(auto ghj : temp.mapa){
+	// 		std::cout << ghj << " ";
+	// 	}
+	// 	std::cout << std::endl;
+	// }
 
 	//--- solving slides --///
 
@@ -59,6 +68,7 @@ void process(std::string filename, int max_iter, int point){
 	//std::vector<Slide> result = slides;
 	//std::vector<Slide> result = solve_meta_1(slides, max_iter, point);
 	std::vector<Slide> result = solve_graph_1(slides, point);
+
 	std::ofstream out;
 	out.open((filename+"_result.txt").c_str());
 	out<<result.size()<<std::endl;
@@ -126,9 +136,9 @@ int main() {
 
 	// sequential loops 
 	for(int i=0; i<3; i++){ //first 3 instances (low memory usage)
-		process(filenames[i],0,2);
+		process(filenames[i],0,0);
 	}
-	for(int i=3; i<5; i++){ //rest instances
+	for(int i=3; i<5; i++){ //rest of instances
 		process(filenames[i],0,2);
 	}
 

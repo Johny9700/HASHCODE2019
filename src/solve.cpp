@@ -173,6 +173,14 @@ std::vector<Slide> solve_graph_1(std::vector<Slide> s, int point){
       ii[k].push_back(i);
     }
   }
+  // print inverted index
+  // for(auto temp : ii){
+  //   std::cout << temp.first << "\t";
+  //   for(auto ghj : temp.second){
+  //     std::cout << ghj << " ";
+  //   }
+  //   std::cout<<std::endl;
+  // }
 
   //neighbour list aggregated
 
@@ -216,7 +224,7 @@ std::vector<Slide> solve_graph_1(std::vector<Slide> s, int point){
 
     v.clear();
     v.shrink_to_fit();
-    delete list;
+    delete [] list;
 
     sort(neighbors.begin(), neighbors.end());
     reverse(neighbors.begin(), neighbors.end());
@@ -228,13 +236,14 @@ std::vector<Slide> solve_graph_1(std::vector<Slide> s, int point){
     neighbors.clear();
     neighbors.shrink_to_fit();
   }
+  std::cout << "List of neighbours created" << std::endl;
 
   //clear inverted index
   for(auto temp : ii){
     temp.second.clear();
     temp.second.shrink_to_fit();
   }
-  ii.clear();
+  // ii.clear();
 
   std::cout << "Going through the graph" << std::endl;
 
@@ -257,10 +266,11 @@ std::vector<Slide> solve_graph_1(std::vector<Slide> s, int point){
     }
     if(!ln[current].empty()){
       current = ln[current][0].id;
-    } else {
+    } else { //chhosing new start if possible
       for(int j=0; j<length; j++){
         if(!visited[j] && !ln[j].empty()){
           current = j;
+          //std::cout << "New start" << std::endl;
           break;
         }
       }
@@ -279,7 +289,7 @@ std::vector<Slide> solve_graph_1(std::vector<Slide> s, int point){
 
   std::cout << "End graph" << std::endl;
 
-  delete visited;
+  delete [] visited;
 
   return result;
 }
