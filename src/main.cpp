@@ -9,7 +9,7 @@
 #include "verticalHeuristic.h"
 #include "solve.h"
 
-void process(std::string filename){
+void process(std::string filename, int max_iter, int point){
 	std::cout<< "Processing "+filename << std::endl;
 	std::ifstream in;
 	int N = -1;
@@ -57,8 +57,8 @@ void process(std::string filename){
 
 	//std::vector<Slide> result = solve(slides);
 	//std::vector<Slide> result = slides;
-	std::vector<Slide> result = solve_meta_1(slides);
-
+	//std::vector<Slide> result = solve_meta_1(slides, max_iter, point);
+	std::vector<Slide> result = solve_graph_1(slides, point);
 	std::ofstream out;
 	out.open((filename+"_result.txt").c_str());
 	out<<result.size()<<std::endl;
@@ -81,10 +81,6 @@ void process(std::string filename){
 	out.close();
 }
 
-void test(){
-	std::cout << "Thread" << std::endl;
-}
-
 int main() {
 	std::cout << "Starting..." << std::endl;
 
@@ -96,25 +92,44 @@ int main() {
 		"e_shiny_selfies"
 	};
 
-	/**
+	// do not run graph solution in paralell (memory usage) 
+	
 	std::thread threads[5];
+	std::thread aT, bT, cT, dT, eT;
 
 	std::cout << "Starting threads" <<std::endl;
 
-	for(int i=0; i<5; i++){
-		//threads[i] = std::thread (process, filenames[i]);
-		threads[i] = std::thread (test);
+	// auto starting threads, some might be badly parametrized
+	// for(int i=0; i<5; i++){
+	// 	threads[i] = std::thread (process, filenames[i], 20000, 15);
+	// }
+
+	//parametrize each set
+	// aT = std::thread (process, filenames[0], 20000, 15);
+	// bT = std::thread (process, filenames[1], 20000, 4);
+	// cT = std::thread (process, filenames[2], 20000, 6);
+	// dT = std::thread (process, filenames[3], 20000, 15);
+	// eT = std::thread (process, filenames[4], 20000, 15);
+
+	// std::cout << "Joining threads" <<std::endl;
+
+	// auto joining threads
+	// for(int i=0; i<5; i++){
+	// 	threads[i].join();
+	// }
+
+	// aT.join();
+	// bT.join();
+	// cT.join();
+	// dT.join();
+	// eT.join();
+
+	// sequential loops 
+	for(int i=0; i<3; i++){ //first 3 instances (low memory usage)
+		process(filenames[i],0,2);
 	}
-
-	std::cout << "Joining threads" <<std::endl;
-
-	for(int i=0; i<5; i++){
-		threads[i].join();
-	}
-	**/
-
-	for(int i=0; i<5; i++){
-		process(filenames[i]);
+	for(int i=3; i<5; i++){ //rest instances
+		process(filenames[i],0,2);
 	}
 
 	std::cout << "Exit" <<std::endl;
